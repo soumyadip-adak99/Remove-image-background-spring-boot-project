@@ -42,6 +42,5 @@ def file_too_large(e):
     return jsonify({"error": "File too large. Max size is 20MB."}), 413
 
 if __name__ == "__main__":
-    # Use the PORT environment variable provided by Render, defaulting to 8000
-    port = int(os.getenv("PORT", 8000))
-    app.run(host='0.0.0.0', port=port, debug=False)
+    port = int(os.environ.get("PORT", 8000))
+    app.run(host='0.0.0.0', port=port)
