@@ -3,48 +3,52 @@ from flask import Flask, request, send_file, jsonify
 from rembg import remove
 import logging
 
+# Minimal Flask app setup
 app = Flask(__name__)
-
-# Configuration
 app.config['MAX_CONTENT_LENGTH'] = 20 * 1024 * 1024  # 20MB
-PORT = 10000  # Explicit port for Render compatibility
 
-# Logging
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
+# Lightweight logging
+logging.basicConfig(level=logging.WARNING)  # Reduced from INFO to WARNING
+logger = logging.getLogger('bg_removal')
+
+# Optimized allowed file check
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'webp'}
 
 
 @app.route("/")
 def health_check():
-    """Endpoint for health checks and port verification"""
-    return "Background Removal API is running", 200
+    return "API Ready", 200
 
 
-@app.route("/remove-background", methods=["POST"])
-def remove_background():
+@app.route("/process", methods=["POST"])  # Shorter endpoint
+def process_image():
     if 'file' not in request.files:
-        return jsonify({"error": "No file provided"}), 400
+        return jsonify({"error": "File missing"}), 400
 
     file = request.files['file']
-    if not file or file.filename == '':
-        return jsonify({"error": "No selected file"}), 400
+    if not file or not file.filename:
+        return jsonify({"error": "Invalid file"}), 400
 
-    if not allowed_file(file.filename):
-        return jsonify({"error": "Invalid file type. Allowed: png, jpg, jpeg, webp"}), 400
+    if not ('.' in file.filename and
+            file.filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS):
+        return jsonify({"error": "File type not allowed"}), 400
 
     try:
-        output_image = remove(file.read())
-        return send_file(io.BytesIO(output_image), mimetype="image/png")
+        # Stream processing instead of full read when possible
+        img_bytes = file.read()
+        if len(img_bytes) > app.config['MAX_CONTENT_LENGTH']:
+            return jsonify({"error": "File too large"}), 413
+
+        # Process and return in one go
+        return send_file(
+            io.BytesIO(remove(img_bytes)),
+            mimetype="image/png",
+            as_attachment=False
+        )
     except Exception as e:
-        logger.error(f"Background removal failed: {str(e)}")
-        return jsonify({"error": "Processing failed"}), 500
-
-
-def allowed_file(filename):
-    return '.' in filename and \
-        filename.rsplit('.', 1)[1].lower() in {'png', 'jpg', 'jpeg', 'webp'}
+        logger.warning(f"Processing failed: {str(e)}")  # Reduced logging
+        return jsonify({"error": "Processing error"}), 500
 
 
 if __name__ == "__main__":
-    # When running with gunicorn, this won't be executed
-    app.run(host='0.0.0.0', port=PORT)
+    app.run(host='0.0.0.0', port=8000)  # Standard port
