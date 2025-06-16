@@ -1,0 +1,26 @@
+spring:
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
+  application:
+    name: RemoveBG
+  datasource:
+    url: ${DB_URI}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+server:
+  port: 8088
+
+clerk:
+  issuer: ${CLERK_ISSUER}
+  jwks-url: ${CLERK_JWKS_URL}
+  webhook:
+    secret: ${CLERK_WEBHOOK_SECRET}
+
+clipdrop:
+  api:
+    key: ${CLIPDROP_API_KEY}
