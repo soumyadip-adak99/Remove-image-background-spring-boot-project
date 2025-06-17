@@ -1,7 +1,4 @@
 spring:
-  autoconfigure:
-    exclude:
-      - org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
   application:
     name: RemoveBG
   datasource:
@@ -21,6 +18,7 @@ clerk:
   webhook:
     secret: ${CLERK_WEBHOOK_SECRET}
 
-clipdrop:
-  api:
-    key: ${CLIPDROP_API_KEY}
+
+razorpay:
+  key: ${RAZORPAY_KEY}
+  secret: ${RAZORPAY_SECRET}

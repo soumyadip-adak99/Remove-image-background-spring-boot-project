@@ -1,6 +1,7 @@
 package org.removeBG.service.implementation;
 
 import lombok.RequiredArgsConstructor;
+import org.removeBG.api.ApiProvider;
 import org.removeBG.service.RemoveBackgroundService;
 import org.removeBG.utility.MultipartInputStreamFileResource;
 import org.springframework.http.*;
@@ -17,11 +18,12 @@ import java.io.IOException;
 public class RemoveBackgroundServiceImpl implements RemoveBackgroundService {
 
     private final RestTemplate restTemplate;
+    private final ApiProvider apiProvider;
 
     @Override
     public byte[] removeBackground(MultipartFile file) {
         try {
-            String apiUrl = "http://127.0.0.1:5001/remove-background";
+            String API = apiProvider.APIS.get(ApiProvider.key.LOCAL_HOST_AI_API.toString());
 
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.MULTIPART_FORM_DATA);
@@ -31,12 +33,7 @@ public class RemoveBackgroundServiceImpl implements RemoveBackgroundService {
 
             HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
 
-            ResponseEntity<byte[]> response = restTemplate.exchange(
-                    apiUrl,
-                    HttpMethod.POST,
-                    requestEntity,
-                    byte[].class
-            );
+            ResponseEntity<byte[]> response = restTemplate.exchange(API, HttpMethod.POST, requestEntity, byte[].class);
 
             return response.getBody();
         } catch (IOException e) {
