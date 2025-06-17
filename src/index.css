@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import "tailwindcss";
+
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Outfit', sans-serif;
+    background: #2A7B9B;
+    background: radial-gradient(circle, rgba(42, 123, 155, 1) 0%, rgba(240, 251, 255, 1) 0%, rgba(255, 245, 245, 1) 43%, rgba(255, 251, 240, 1) 64%, rgba(255, 243, 230, 1) 86%, rgba(255, 232, 232, 1) 100%);
+}
+
+.slider {
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+    cursor: pointer;
+    z-index: 10;
+    position: absolute;
+    height: 100%;
+    outline: none;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 32px;
+    height: 32px;
+    background-image: url('/src/assets/slide_icon.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    border: none;
+    cursor: grab;
+}
+
+.slider::-moz-range-thumb {
+    width: 32px;
+    height: 32px;
+    background-image: url('/src/assets/slide_icon.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    border: none;
+    cursor: grab;
+}
