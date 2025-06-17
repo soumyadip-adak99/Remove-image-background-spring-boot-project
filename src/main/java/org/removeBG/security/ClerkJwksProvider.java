@@ -27,7 +27,6 @@ public class ClerkJwksProvider {
     private static final long CACHE_TIME_TO_LIVE = 3600000; // 1 hour in milliseconds
 
     public PublicKey getPublicKey(String keyId) throws Exception {
-        // Fixed cache logic: refresh if key not found OR cache expired
         if (!keyCache.containsKey(keyId) || System.currentTimeMillis() - lastFetchTime > CACHE_TIME_TO_LIVE) {
             log.info("🔄 Refreshing JWKS keys from Clerk");
             refreshKeys();
@@ -54,14 +53,13 @@ public class ClerkJwksProvider {
             keyCache.clear(); // Clear old keys
 
             for (JsonNode key : keys) {
-                // Fixed: JWT headers use 'kid' not 'keyID'
                 String keyId = key.get("kid").asText();
-                String keyType = key.get("kty").asText(); // 'kty' not 'keyType'
-                String algorithm = key.get("alg").asText(); // 'alg' not 'algorithm'
+                String keyType = key.get("kty").asText();
+                String algorithm = key.get("alg").asText();
 
                 if ("RSA".equals(keyType) && "RS256".equals(algorithm)) {
-                    String modulus = key.get("n").asText(); // 'n' not 'modulus'
-                    String exponent = key.get("e").asText(); // 'e' not 'exponent'
+                    String modulus = key.get("n").asText();
+                    String exponent = key.get("e").asText();
 
                     PublicKey publicKey = createPublicKey(modulus, exponent);
                     keyCache.put(keyId, publicKey);
