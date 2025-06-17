@@ -9,6 +9,7 @@ import psutil
 
 # Production Flask app setup
 app = Flask(__name__)
+
 app.config.update(
     MAX_CONTENT_LENGTH=15 * 1024 * 1024,  # 15MB limit
     SEND_FILE_MAX_AGE_DEFAULT=3600,  # Cache for 1 hour
@@ -171,12 +172,5 @@ def cleanup(error):
 
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 8080))
-    debug = os.environ.get("FLASK_ENV", "production") == "development"
-
-    app.run(
-        host="0.0.0.0",
-        port=port,
-        debug=debug,
-        threaded=True  # Handle multiple requests
-    )
+    port = int(os.getenv("PORT", 8080))
+    app.run(host='0.0.0.0', port=port, debug=False)
