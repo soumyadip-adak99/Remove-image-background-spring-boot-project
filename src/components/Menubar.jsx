@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import { assets } from '../assets/assets';
 import { Menu, X } from 'lucide-react';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { SignedOut, SignedIn, useClerk, UserButton, useUser } from '@clerk/clerk-react';
 import { AppContext } from '../context/AppContext';
 
@@ -52,10 +52,12 @@ const Menubar = () => {
 
                 <SignedIn>
                     <div className='flex items-center gap-3'>
-                        <button className='flex items-center gap-2 bg-blue-50 px-4 py-2 rounded-full hover:scale-105 transition duration-300'>
-                            <img src={assets.credit} alt="credits" className='h-5 w-5' />
-                            <span className='text-sm font-medium text-gray-600'>Credits: {credit}</span>
-                        </button>
+                        <Link to='/pricing'>
+                            <button className='flex items-center gap-2 bg-blue-50 px-4 py-2 rounded-full hover:scale-105 transition duration-300 cursor-pointer'>
+                                <img src={assets.credit} alt="credits" className='h-5 w-5' />
+                                <span className='text-sm font-medium text-gray-600'>Credits: {credit}</span>
+                            </button>
+                        </Link>
 
                         <span className='text-gray-600 hidden sm:block'>Hi, {user?.fullName}</span>
                         <UserButton />

@@ -10,7 +10,7 @@ const Footer = () => {
 
             {/* Copyright */}
             <p className="text-gray-600 text-sm w-full sm:w-auto">
-                &copy; {new Date().getFullYear()} @soumyadipadak | All rights reserved.
+                &copy; {new Date().getFullYear()} Design & Developed by Soumyadip Adak
             </p>
 
             {/* Social Icons */}

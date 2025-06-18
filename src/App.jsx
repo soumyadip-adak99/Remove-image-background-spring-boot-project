@@ -7,6 +7,7 @@ import UserSyncHandler from "./components/UserSyncHandler";
 import Connection from "./api/Connection";
 import { SignedOut, SignedIn, RedirectToSignIn } from "@clerk/clerk-react";
 import Result from "./pages/Result";
+import PricingCatagory from "./pages/PricingCatagory";
 
 function App() {
     return (
@@ -17,6 +18,7 @@ function App() {
             <Toaster />
             <Routes>
                 <Route path="/" element={<Home />} />
+                <Route path="/pricing" element={<PricingCatagory />} />
                 <Route path="/result" element={
                     <>
                         <SignedIn>
