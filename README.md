@@ -1,7 +1,9 @@
+Here's your updated and **professionally structured** project overview with polished wording and improved clarity. It's ready to be used in your `README.md` or on GitHub:
+
+---
+
 <div align="center">
   <h1>🖼️ Image Background Removal</h1>
-
-  <!-- Technology badges -->
 
   <div>
     <img src="https://img.icons8.com/?size=100&id=NfbyHexzVEDk&format=png&color=000000" height="50" width="50" alt="React" />
@@ -36,40 +38,55 @@
 
 ### 🔹 Frontend
 
-* Built with **React** and styled using **Tailwind CSS**
-* Provides a clean and attractive user interface
+* Built with **React.js**
+* Styled using **Tailwind CSS**
+* Offers a modern, responsive, and user-friendly interface
 
-### 🔹 Backend (API Layer)
+### 🔹 Backend (API Service)
 
-* Developed using **Spring Boot**
-* Handles user data, subscriptions, and communication with the Flask AI service
+* Built with **Spring Boot**
+* Handles REST APIs for image handling, user data, and payments
+* Connects frontend and AI service modules
 
 ### 🔹 Authentication
 
-* User authentication is managed by **Clerk**
+* Powered by **Clerk**
+* Handles user registration, login, and session management securely
 
-### 🔹 AI & Image Background Removal
+### 🔹 AI & Background Removal Service
 
-* Implemented using **Python** and **Flask**
-* Leverages image processing libraries to remove backgrounds from uploaded images
+* Developed using **Python** and **Flask**
+* Uses advanced image processing libraries to remove image backgrounds
 
 ### 🔹 Payment Integration
 
-* Integrated with **Razorpay** for handling user subscriptions and payments
+* Integrated with **Razorpay** for managing subscriptions and transactions
 
 ### 🔹 Database
 
-* Uses **PostgreSQL** to store user data, payment info, and image metadata
+* Utilizes **PostgreSQL**
+* Stores user information, and payment records
 
 ---
 
 ## ✨ Key Features
 
-* 🚀 **Attractive and responsive user interface**
-* 🖼️ **Upload any image to remove background using AI**
-* 🔐 **Secure authentication via Clerk**
-* 💳 **Subscription-based access with Razorpay integration**
-* 📦 **Data persistence using PostgreSQL**
-* ⚙️ **Microservice-based architecture using Flask and Spring Boot**
+* 🚀 **Clean and responsive UI** with modern design
+* 🖼️ **Automatic background removal** using AI-powered Flask service
+* 🔐 **Secure authentication** via Clerk
+* 💳 **Subscription support** using Razorpay
+* 🗃️ **PostgreSQL database** for persistent storage
+* 🔌 **Modular microservices architecture** using Flask + Spring Boot
 
+---
+
+## 🌿 Repository Branches
+
+This project is organized into three main branches for modularity and clarity:
+
+| Branch                                                                                                        | Description                                                              |
+| ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| [`main`](https://github.com/soumyadip-adak99/Remove-image-background-spring-boot-project)                     | Contains the **Spring Boot** backend code (REST API & integration logic) |
+| [`Font-end`](https://github.com/soumyadip-adak99/Remove-image-background-spring-boot-project/tree/Font-end)   | Contains the **React + Tailwind** frontend UI                            |
+| [`ML-branch`](https://github.com/soumyadip-adak99/Remove-image-background-spring-boot-project/tree/ML-branch) | Contains the **Flask-based AI service** for background removal           |
 
