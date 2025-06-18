@@ -1,7 +1,3 @@
-Here's your updated and **professionally structured** project overview with polished wording and improved clarity. It's ready to be used in your `README.md` or on GitHub:
-
----
-
 <div align="center">
   <h1>🖼️ Image Background Removal</h1>
 
